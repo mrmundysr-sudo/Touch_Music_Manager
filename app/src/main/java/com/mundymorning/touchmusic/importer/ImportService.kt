@@ -19,7 +19,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.launch
 
 /** Keeps imports running while the app is in the background, with a progress notification. */
@@ -43,7 +42,7 @@ class ImportService : Service() {
             worker = scope.launch {
                 val manager = getSystemService(NotificationManager::class.java)
                 val updates = launch {
-                    controller.progress.conflate().collect { p ->
+                    controller.progress.collect { p ->
                         if (p != null) manager.notify(NOTIFICATION_ID, build(p))
                         delay(700)
                     }
