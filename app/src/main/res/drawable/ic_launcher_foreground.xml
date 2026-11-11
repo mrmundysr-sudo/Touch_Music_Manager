@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Temporary placeholder mark: a rising sun with a music note. -->
+    <path
+        android:fillColor="#FFB347"
+        android:pathData="M30,70a24,24 0 0,1 48,0z" />
+    <path
+        android:fillColor="#0D0E12"
+        android:pathData="M58,40v24.5a7,7 0 1,1 -4,-6.3V40z" />
+    <path
+        android:fillColor="#FFB347"
+        android:pathData="M54,36h14v7h-14z" />
+    <path
+        android:fillColor="#FF7A59"
+        android:pathData="M26,74h56v3h-56z" />
+</vector>
