@@ -28,10 +28,17 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Unit tests (import engine)
-        run: ./gradlew :core:test --stacktrace
+        run: ./gradlew :core:test
 
       - name: Build debug APK and run app unit tests
-        run: ./gradlew :app:assembleDebug :app:testDebugUnitTest --stacktrace
+        run: |
+          set -o pipefail
+          ./gradlew :app:assembleDebug :app:testDebugUnitTest 2>&1 | tee build.log
+
+      - name: Compiler errors
+        if: failure()
+        run: |
+          grep -E "^e: |^w: .*error|error:|\[ksp\]|What went wrong" -A2 build.log | sed "s#file://$GITHUB_WORKSPACE/app/src/main/java/com/mundymorning/touchmusic/##" | head -150 || true
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
